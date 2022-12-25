@@ -3,6 +3,4 @@
 /postgres-data/
 /postgres_tmp/
 photo/settings.py
-/blog/migrations/
-/core/migrations/
 /media/
