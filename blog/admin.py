@@ -1,5 +1,6 @@
+from ckeditor.widgets import CKEditorWidget
 from django.contrib import admin
-
+from django import forms
 from blog.models import BlogTag, BlogImage, BlogItem
 
 
@@ -17,14 +18,18 @@ class BlogImageAdmin(admin.ModelAdmin):
     list_display = ("image_thumb", "name")
 
 
+class BlogItemForm(forms.ModelForm):
+    title = forms.CharField(label='Заголовок', max_length=255)
+    content = forms.CharField(label='Текст страницы', widget=CKEditorWidget())
+
+
 class BlogItemAdmin(admin.ModelAdmin):
+    form = BlogItemForm
+
     fieldsets = (
         (None, {"fields": ("main_tag", "tags", "main_photo", "title",
-                           "top_text",
-                           "quote",
-                           "description",
-                           "last_description",
                            "image",
+                           "content"
                            )}),
     )
     list_display = ("image_thumb", "title", "main_tag", "date")

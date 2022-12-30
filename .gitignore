@@ -4,3 +4,8 @@
 /postgres_tmp/
 photo/settings.py
 /media/
+/mydatabase
+/core/migrations/0001_initial.py
+/blog/migrations/0001_initial.py
+/static/ckeditor/
+/static/admin/

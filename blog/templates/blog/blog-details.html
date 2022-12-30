@@ -45,31 +45,19 @@
                                 <li>{{ object.date|date:"d/m/Y" }}</li>
                             </ul>
                         </div>
-                        {%if object.top_text %}
+
+                        {%if object.content %}
                         <div class="bd-top-text">
-                            <p>{{ object.top_text }}</p>
+                            {{ object.content|safe }}
                         </div>
                         {% endif %}
-                        {%if object.quote %}
-                        <div class="bd-quote">
-                            <p>{{ object.quote }}</p>
-                        </div>
-                        {% endif %}
-                        {% if object.description %}
-                        <div class="bd-desc">
-                            <p>{{ object.description }}</p>
-                        </div>
-                        {% endif %}
+
                         <div class="bd-pics">
                             {% for img in object.image.all %}
                                 <img src="/media/{{ img.image }}" alt="{{ img.name }}">
                             {% endfor %}
                         </div>
-                        {% if object.last_description %}
-                        <div class="bd-last-desc">
-                            <p>{{ object.last_description }}</p>
-                        </div>
-                        {% endif %}
+
                         <div class="bd-tag-share">
                             <div class="tags">
                                 {% for tag in tags %}

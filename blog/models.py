@@ -44,11 +44,9 @@ class BlogItem(models.Model):
     tags = models.ManyToManyField(BlogTag, verbose_name="Теги", related_name="blog_item")
     main_photo = models.ImageField(verbose_name="Главное фото", upload_to="blog/%Y/%m/")
     title = models.CharField(max_length=255, verbose_name="Заголовок")
-    top_text = models.CharField(max_length=2048, verbose_name="Вступление", null=True, blank=True)
-    quote = models.CharField(max_length=1024, verbose_name="Цитата", null=True, blank=True)
-    description = models.CharField(max_length=2048, verbose_name="Описание", null=True, blank=True)
-    last_description = models.CharField(max_length=2048, verbose_name="Окончание", null=True, blank=True)
-    image = models.ManyToManyField(BlogImage, verbose_name="Фото в тексте блога")
+
+    image = models.ManyToManyField(BlogImage, verbose_name="Фото в тексте блога", null=True, blank=True)
+    content = models.TextField(verbose_name='Текст страницы', null=True)
 
     def image_thumb(self):
         return mark_safe('<img src="/media/%s" height=50>' % self.main_photo)
