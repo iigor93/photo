@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+
+{% block content %}
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bo-links">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                        <span>Blog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Blog Section Begin -->
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-9">
+
+                    {% for object in object_list %}
+                    <div class="blog-item">
+                        <div class="bi-pic">
+                            <img width="420px" src="/media/{{ object.main_photo }}" alt="">
+                        </div>
+                        <div class="bi-text">
+                            <div class="label">{{ object.main_tag }}</div>
+                            <h5><a href="{% url 'blog_detail' object.id %}">{{ object.title }}...</a>
+                            </h5>
+                            <ul>
+                                <li>{{ object.date|date:"d/m/Y" }}</li>
+                            </ul>
+                            <p>{{ object.pre_text }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div class="blog-pagination">
+                        {% if paginator.num_pages > 1 %}
+                            {% if object_list.number != 1 and object_list.number != 2 %}
+                                <a href="?page=1">&laquo;</a>
+                            {% endif %}
+
+                            {% if previous_page %}
+                                <a href="?page={{ previous_page }}">{{ previous_page }}</a>
+                            {% endif %}
+
+                            <a href="?page={{ current_page }}" style="color:red;">{{ current_page }}</a>
+
+                            {% if next_page %}
+                                <a href="?page={{ next_page }}">{{ next_page }}</a>
+                            {% endif %}
+
+                            {% if object_list.number != paginator.num_pages %}
+                                <a href="?page={{ paginator.num_pages }}">&raquo;</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="blog-sidebar">
+                        <div class="bs-item s-mb">
+                            <h5>Feature posts</h5>
+                            <div class="bi-feature-post">
+                                <a href="#" class="fp-item">
+                                    <div class="fp-pic">
+                                        <img src="img/blog/fp-1.jpg" alt="">
+                                    </div>
+                                    <div class="fp-text">
+                                        <h6>This Photograph Has Elderly Couples...</h6>
+                                        <span>Aug,15, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="fp-item">
+                                    <div class="fp-pic">
+                                        <img src="img/blog/fp-2.jpg" alt="">
+                                    </div>
+                                    <div class="fp-text">
+                                        <h6>Budget Gear Guide: The Best Cheap Off...</h6>
+                                        <span>Aug,15, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="fp-item">
+                                    <div class="fp-pic">
+                                        <img src="img/blog/fp-3.jpg" alt="">
+                                    </div>
+                                    <div class="fp-text">
+                                        <h6>Know Before You Go: Guide to Disney...</h6>
+                                        <span>Aug,15, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="fp-item">
+                                    <div class="fp-pic">
+                                        <img src="img/blog/fp-4.jpg" alt="">
+                                    </div>
+                                    <div class="fp-text">
+                                        <h6>Budget Gear Guide: The Best Cheap Off...</h6>
+                                        <span>Aug,15, 2019</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="fp-item">
+                                    <div class="fp-pic">
+                                        <img src="img/blog/fp-5.jpg" alt="">
+                                    </div>
+                                    <div class="fp-text">
+                                        <h6>Know Before You Go: Guide to Disney...</h6>
+                                        <span>Aug,15, 2019</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="bs-item s-mb">
+                            <h5>Subscribe</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor.</p>
+                            <div class="bi-subscribe">
+                                <form action="#">
+                                    <input type="text" placeholder="Name">
+                                    <input type="text" placeholder="Email">
+                                    <button type="submit" class="site-btn">Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="bs-item">
+                            <h5>Instagram</h5>
+                            <div class="bi-insta">
+                                <img src="img/blog/insta-1.jpg" alt="">
+                                <img src="img/blog/insta-2.jpg" alt="">
+                                <img src="img/blog/insta-3.jpg" alt="">
+                                <img src="img/blog/insta-4.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Section End -->
+
+{% endblock %}

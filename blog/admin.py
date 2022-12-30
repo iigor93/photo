@@ -29,7 +29,8 @@ class BlogItemAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("main_tag", "tags", "main_photo", "title",
                            "image",
-                           "content"
+                           "content",
+                           "pre_text",
                            )}),
     )
     list_display = ("image_thumb", "title", "main_tag", "date")

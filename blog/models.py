@@ -45,8 +45,9 @@ class BlogItem(models.Model):
     main_photo = models.ImageField(verbose_name="Главное фото", upload_to="blog/%Y/%m/")
     title = models.CharField(max_length=255, verbose_name="Заголовок")
 
-    image = models.ManyToManyField(BlogImage, verbose_name="Фото в тексте блога", null=True, blank=True)
+    image = models.ManyToManyField(BlogImage, verbose_name="Фото в тексте блога", blank=True)
     content = models.TextField(verbose_name='Текст страницы', null=True)
+    pre_text = models.CharField(max_length=1024, verbose_name="Текст в списке блогов", null=True, blank=True)
 
     def image_thumb(self):
         return mark_safe('<img src="/media/%s" height=50>' % self.main_photo)
