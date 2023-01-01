@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "corsheaders",
     'ckeditor',
     'ckeditor_uploader',
+    "debug_toolbar",
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',
     'price.apps.PriceConfig',
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'photo.urls'
@@ -158,3 +160,9 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 THUMBNAIL_SIZE = (70, 70)
 CKEDITOR_FORCE_JPEG_COMPRESSION = True
 CKEDITOR_IMAGE_QUALITY = 70
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]

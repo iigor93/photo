@@ -12,7 +12,7 @@ class BlogListView(ListView):
     template_name = "blog/blogitem_list.html"
 
     def get(self, request, *args, **kwargs):
-        blogs = BlogItem.objects.all()
+        blogs = BlogItem.objects.all().select_related("main_tag")
         paginator = Paginator(blogs, self.paginate_by)
 
         page_number = request.GET.get('page')
@@ -41,7 +41,7 @@ class BlogDetail(View):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("pk")
-        blog = BlogItem.objects.get(pk=pk)
+        blog = BlogItem.objects.prefetch_related("tags").select_related("main_tag").get(pk=pk)
         tags = [blog.main_tag]
         tags.extend(blog.tags.all())
         tags = list(set(tags))

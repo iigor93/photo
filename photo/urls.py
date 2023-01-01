@@ -6,6 +6,7 @@ from photo import settings
 
 urlpatterns = [
     path('config_admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
     path('', include('core.urls')),
     path('blog/', include('blog.urls')),
     path('price/', include('price.urls')),

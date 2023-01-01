@@ -10,7 +10,7 @@ class Index(View):
     def get(self, request):
         carousel = Carousel.objects.filter(active=True)
         advantages = Advantage.objects.filter(active=True)
-        portfolio = Portfolio.objects.filter(active=True)
+        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)
         categories = []
         for item in portfolio:
             cat = list(item.category.all())
