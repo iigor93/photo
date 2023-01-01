@@ -5,7 +5,7 @@ from django.urls import path, include
 from photo import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('config_admin/', admin.site.urls),
     path('', include('core.urls')),
     path('blog/', include('blog.urls')),
     path('price/', include('price.urls')),
