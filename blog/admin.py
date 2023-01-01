@@ -31,6 +31,7 @@ class BlogItemAdmin(admin.ModelAdmin):
                            "image",
                            "content",
                            "pre_text",
+                           "feature_post",
                            )}),
     )
     list_display = ("image_thumb", "title", "main_tag", "date")

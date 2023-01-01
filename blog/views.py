@@ -22,12 +22,15 @@ class BlogListView(ListView):
         previous_page = object_list.number - 1 if object_list.number > 1 else None
         next_page = object_list.number + 1 if object_list.number < paginator.num_pages else None
 
+        feature_post = BlogItem.objects.filter(feature_post=True)[:5]
+
         context = {
             "object_list": object_list,
             "paginator": paginator,
             "current_page": current_page,
             "previous_page": previous_page,
             "next_page": next_page,
+            "feature_post": feature_post,
         }
 
         return render(request, self.template_name, context=context)

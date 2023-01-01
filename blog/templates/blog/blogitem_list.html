@@ -71,73 +71,20 @@
                         <div class="bs-item s-mb">
                             <h5>Feature posts</h5>
                             <div class="bi-feature-post">
-                                <a href="#" class="fp-item">
+                                {% for object in feature_post %}
+                                <a href="{% url 'blog_detail' object.id %}" class="fp-item">
                                     <div class="fp-pic">
-                                        <img src="img/blog/fp-1.jpg" alt="">
+                                        <img width="90px" src="/media/{{ object.main_photo }}" alt="">
                                     </div>
                                     <div class="fp-text">
-                                        <h6>This Photograph Has Elderly Couples...</h6>
-                                        <span>Aug,15, 2019</span>
+                                        <h6>{{ object.title }}</h6>
+                                        <span>{{ object.date|date:"d/m/Y"  }}</span>
                                     </div>
                                 </a>
-                                <a href="#" class="fp-item">
-                                    <div class="fp-pic">
-                                        <img src="img/blog/fp-2.jpg" alt="">
-                                    </div>
-                                    <div class="fp-text">
-                                        <h6>Budget Gear Guide: The Best Cheap Off...</h6>
-                                        <span>Aug,15, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="fp-item">
-                                    <div class="fp-pic">
-                                        <img src="img/blog/fp-3.jpg" alt="">
-                                    </div>
-                                    <div class="fp-text">
-                                        <h6>Know Before You Go: Guide to Disney...</h6>
-                                        <span>Aug,15, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="fp-item">
-                                    <div class="fp-pic">
-                                        <img src="img/blog/fp-4.jpg" alt="">
-                                    </div>
-                                    <div class="fp-text">
-                                        <h6>Budget Gear Guide: The Best Cheap Off...</h6>
-                                        <span>Aug,15, 2019</span>
-                                    </div>
-                                </a>
-                                <a href="#" class="fp-item">
-                                    <div class="fp-pic">
-                                        <img src="img/blog/fp-5.jpg" alt="">
-                                    </div>
-                                    <div class="fp-text">
-                                        <h6>Know Before You Go: Guide to Disney...</h6>
-                                        <span>Aug,15, 2019</span>
-                                    </div>
-                                </a>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="bs-item s-mb">
-                            <h5>Subscribe</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor.</p>
-                            <div class="bi-subscribe">
-                                <form action="#">
-                                    <input type="text" placeholder="Name">
-                                    <input type="text" placeholder="Email">
-                                    <button type="submit" class="site-btn">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="bs-item">
-                            <h5>Instagram</h5>
-                            <div class="bi-insta">
-                                <img src="img/blog/insta-1.jpg" alt="">
-                                <img src="img/blog/insta-2.jpg" alt="">
-                                <img src="img/blog/insta-3.jpg" alt="">
-                                <img src="img/blog/insta-4.jpg" alt="">
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

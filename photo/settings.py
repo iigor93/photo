@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'core.apps.CoreConfig',
     'blog.apps.BlogConfig',
+    'price.apps.PriceConfig',
 ]
 
 MIDDLEWARE = [
