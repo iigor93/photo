@@ -33,9 +33,9 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 class SubscribeEmailAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('email', 'date')}),
+        (None, {'fields': ('email', 'date', "delete_code")}),
     )
-    readonly_fields = ('date',)
+    readonly_fields = ('date', "email", "delete_code")
     list_display = ('email', 'date')
 
 

@@ -1,3 +1,6 @@
+import secrets
+import string
+
 from django.db import models
 from django.utils.safestring import mark_safe
 
@@ -86,8 +89,15 @@ class SubscribeEmail(models.Model):
         verbose_name_plural = "Emails"
         ordering = ('date',)
 
-    email = models.EmailField(verbose_name="Email")
+    email = models.EmailField(verbose_name="Email", unique=True)
     date = models.DateField(auto_now_add=True, verbose_name="Дата добавления")
+    delete_code = models.CharField(max_length=21, verbose_name="Код проверки для удаления", null=True)
+
+    def save(self, *args, **kwargs):
+        num = 20
+        res = ''.join(secrets.choice(string.ascii_letters + string.digits) for x in range(num))
+        self.delete_code = str(res)
+        super(SubscribeEmail, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.email

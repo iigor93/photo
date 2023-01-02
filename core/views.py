@@ -31,7 +31,7 @@ class Index(View):
 
 class Subscribe(View):
     def post(self, request, *args, **kwargs):
-        print(request.POST)
+        # print(request.POST)
 
         email = request.POST.get("email")
         try:
