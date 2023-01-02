@@ -76,3 +76,18 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SubscribeEmail(models.Model):
+    """ Email с формы в футере """
+
+    class Meta:
+        verbose_name = "Email"
+        verbose_name_plural = "Emails"
+        ordering = ('date',)
+
+    email = models.EmailField(verbose_name="Email")
+    date = models.DateField(auto_now_add=True, verbose_name="Дата добавления")
+
+    def __str__(self):
+        return self.email

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Carousel, Advantage, Category, Portfolio
+from core.models import Carousel, Advantage, Category, Portfolio, SubscribeEmail
 
 
 class CarouselAdmin(admin.ModelAdmin):
@@ -31,7 +31,16 @@ class PortfolioAdmin(admin.ModelAdmin):
     list_display = ('image_thumb', 'title', 'wh_class', 'active')
 
 
+class SubscribeEmailAdmin(admin.ModelAdmin):
+    fieldsets = (
+        (None, {'fields': ('email', 'date')}),
+    )
+    readonly_fields = ('date',)
+    list_display = ('email', 'date')
+
+
 admin.site.register(Carousel, CarouselAdmin)
 admin.site.register(Advantage, AdvantageAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Portfolio, PortfolioAdmin)
+admin.site.register(SubscribeEmail, SubscribeEmailAdmin)
