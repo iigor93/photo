@@ -49,7 +49,10 @@ class Category(models.Model):
         ordering = ('id',)
 
     name = models.CharField(max_length=100, verbose_name="Категория")
-    filter_name = models.CharField(max_length=50, verbose_name="Имя для фильтра")
+    image = models.ImageField(verbose_name="Изображение", upload_to='category/%Y/%m/', null=True)
+
+    def image_thumb(self):
+        return mark_safe('<img src="/media/%s" height=50>' % self.image)
 
     def __str__(self):
         return self.name

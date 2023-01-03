@@ -17,7 +17,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                     incididunt ut labore et<br /> dolore magna aliqua. Quis ipsum suspendisse ultrices
                                     gravida accumsan lacus vel facilisis.</p>
-                                <a href="#" class="primary-btn">Contact us</a>
+<!--                                <a href="#" class="primary-btn">Contact us</a>-->
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <ul>
                             <li class="active" data-filter="*">All</li>
                             {% for category in categories %}
-                                <li data-filter=".{{ category.filter_name }}">{{ category.name }}</li>
+                                <li data-filter=".{{ category.name }}">{{ category.name }}</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -126,7 +126,7 @@
                 <div class="col-lg-12 p-0">
                     <div class="portfolio-filter">
                         {% for item in portfolio %}
-                        <div class="pf-item set-bg {{ item.wh_class }} {% for filter_ in item.category.all %}{{ filter_.filter_name }} {% endfor %}"
+                        <div class="pf-item set-bg {{ item.wh_class }} {% for filter_ in item.category.all %}{{ filter_.name }} {% endfor %}"
                              data-setbg="/media/{{ item.image }}">
                             <a href="/media/{{ item.image }}" class="pf-icon image-popup"><span class="icon_plus"></span></a>
                             <div class="pf-text">

@@ -19,9 +19,9 @@ class AdvantageAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('name', 'filter_name')}),
+        (None, {'fields': ('image', 'name',)}),
     )
-    list_display = ('name',)
+    list_display = ('image_thumb', 'name',)
 
 
 class PortfolioAdmin(admin.ModelAdmin):
