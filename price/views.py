@@ -13,7 +13,7 @@ class PriceView(View):
         prices = Price.objects.all()
         faqs = Faq.objects.all()
 
-        context = {"prices": prices}
+        context = {"prices": prices, "breadcrumb": "Цена"}
 
         if faqs:
             faq_half = math.ceil(faqs.count()/2)

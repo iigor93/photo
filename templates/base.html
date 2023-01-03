@@ -26,6 +26,26 @@
     <!-- Header Section Begin -->
     {% include "header.html" %}
     <!-- Header End -->
+
+    {% if not home %}
+    <!-- Breadcrumb Begin -->
+
+    <div class="breadcrumb-option spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="bo-links">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                        <span>{{ breadcrumb }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb End -->
+    {% endif %}
+
 {% block content %}
 {% endblock %}
 {% include "footer.html" %}

@@ -1,9 +1,10 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
+from django.views.generic import DetailView
 
-from core.models import Carousel, Advantage, Portfolio, SubscribeEmail
+from core.models import Carousel, Advantage, Portfolio, SubscribeEmail, Contact, About
 
 
 class Index(View):
@@ -24,6 +25,8 @@ class Index(View):
             "advantages": advantages,
             "portfolio": portfolio,
             "categories": categories,
+            "home": True,
+            "breadcrumb": "Home"
         }
 
         return render(request, self.template_name, context=context)
@@ -40,3 +43,21 @@ class Subscribe(View):
             print(e)
 
         return HttpResponseRedirect(reverse("index"))
+
+
+class ContactView(View):
+    template_name = "core/contact.html"
+
+    def get(self, request, *args, **kwargs):
+        context = {"contact": Contact.objects.all().last(), "breadcrumb": "Контакты"}
+        return render(request, self.template_name, context=context)
+
+
+class AboutView(View):
+    template_name = "core/about.html"
+
+    def get(self, request, *args, **kwargs):
+        about = About.objects.all().last()
+
+        context = {"breadcrumb": "О нас", "about": about}
+        return render(request, self.template_name, context=context)

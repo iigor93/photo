@@ -31,6 +31,8 @@ class BlogListView(ListView):
             "previous_page": previous_page,
             "next_page": next_page,
             "feature_post": feature_post,
+            "blog": True,
+            "breadcrumb": "Блог",
         }
 
         return render(request, self.template_name, context=context)

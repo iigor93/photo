@@ -10,20 +10,13 @@
                 </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="{% url 'index' %}">Home</a></li>
-                        <li><a href="./about.html">About</a></li>
-                        <li><a href="./services.html">Services</a></li>
-                        <li><a href="{% url 'price_list' %}">Pricing</a></li>
-                        <li><a href="./portfolio.html">Portfolio</a></li>
-                        <li><a href="{% url 'blog_list' %}">Blog</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="dropdown">
-                                <li><a href="./gallery.html">Gallery</a></li>
-                                <li><a href="./portfolio-details.html">Portfolio Details</a></li>
-                                <li><a href="./blog-details.html">Blog Details</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="./contact.html">Contact</a></li>
+                        <li {% if home %} class="active" {% endif %}><a href="{% url 'index' %}">Home</a></li>
+                        <li {% if about %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
+                        <li {% if services %} class="active" {% endif %}><a href="./services.html">Services</a></li>
+                        <li {% if prices %} class="active" {% endif %}><a href="{% url 'price_list' %}">Pricing</a></li>
+                        <li {% if portfolio %} class="active" {% endif %}><a href="./portfolio.html">Portfolio</a></li>
+                        <li {% if blog %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
+                        <li {% if contact %} class="active" {% endif %}><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="top-search search-switch">

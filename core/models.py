@@ -101,3 +101,27 @@ class SubscribeEmail(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Contact(models.Model):
+    """ Contact info """
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+
+    address = models.CharField(max_length=255, verbose_name="Адрес")
+    phone = models.CharField(max_length=20, verbose_name="Номер телефона")
+    email = models.EmailField(verbose_name="Email")
+
+
+class About(models.Model):
+    """ О нас """
+
+    class Meta:
+        verbose_name = "О нас"
+        verbose_name_plural = "О нас"
+
+    image = models.ImageField(verbose_name="Изображение", upload_to='about/%Y/%m/')
+    title = models.CharField(max_length=100, verbose_name="Заголовок")
+    text = models.CharField(max_length=1024, verbose_name="Описание")

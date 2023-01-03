@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load l10n %}
+
+{% block content %}
+
+    <!-- Contact Section Begin -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="contact-text">
+                        <h3>Get in touch</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.</p>
+
+                        <div class="row">
+                        <div class="col-md-4">
+                            <div class="ct-item">
+                                <div class="ct-icon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div class="ct-text">
+                                    <h5>Адрес</h5>
+                                    <p>{{ contact.address }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ct-item">
+                                <div class="ct-icon">
+                                    <i class="fa fa-mobile"></i>
+                                </div>
+                                <div class="ct-text">
+                                    <h5>Телефон</h5>
+                                    <ul>
+                                        <li><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="ct-item">
+                                <div class="ct-icon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="ct-text">
+                                    <h5>Email</h5>
+                                    <p><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+<br><br>
+
+    <!-- Contact Section End -->
+
+{% endblock %}
