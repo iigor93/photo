@@ -12,7 +12,7 @@
                     <ul>
                         <li {% if home %} class="active" {% endif %}><a href="{% url 'index' %}">Home</a></li>
                         <li {% if about %} class="active" {% endif %}><a href="{% url 'about' %}">About</a></li>
-                        <li {% if services %} class="active" {% endif %}><a href="./services.html">Services</a></li>
+                        <li {% if services %} class="active" {% endif %}><a href="{% url 'services' %}">Services</a></li>
                         <li {% if prices %} class="active" {% endif %}><a href="{% url 'price_list' %}">Pricing</a></li>
                         <li {% if portfolio %} class="active" {% endif %}><a href="./portfolio.html">Portfolio</a></li>
                         <li {% if blog %} class="active" {% endif %}><a href="{% url 'blog_list' %}">Blog</a></li>
