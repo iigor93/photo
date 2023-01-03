@@ -1,5 +1,6 @@
 import math
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -36,6 +37,23 @@ class Index(View):
 
 
 class Subscribe(View):
+    template_name = "core/unsubscribe.html"
+
+    def get(self, request, *args, **kwargs):
+        email = request.GET.get("email", None)
+        code = request.GET.get("code", None)
+
+        try:
+            e = SubscribeEmail.objects.get(email=email, delete_code=code)
+            e.delete()
+            msg = f"Ваш email {email} удален из нашей рассылки."
+        except ObjectDoesNotExist:
+            msg = "Похоже Ваш email уже удален из рассылки."
+
+        context = {"msg": msg}
+
+        return render(request, self.template_name, context=context)
+
     def post(self, request, *args, **kwargs):
         # print(request.POST)
 
