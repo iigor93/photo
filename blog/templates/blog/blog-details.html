@@ -13,8 +13,8 @@
                     <div class="blog-details-text">
                         <div class="bd-title">
                             <div class="bt-bread">
-                                <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                                <a href="./index.html">Blog</a>
+                                <a href="{% url 'index' %}"><i class="fa fa-home"></i> !Home</a>
+                                <a href="{% url 'blog_list' %}">Blog</a>
                                 <span>{{ object.title }}</span>
                             </div>
                             <h2>{{ object.title }}</h2>
@@ -52,30 +52,30 @@
 
                         <div class="bd-related-post">
                             <div class="row">
+                                {% if prev_blog %}
                                 <div class="col-lg-6">
-                                    <a href="#" class="post-item prev-item">
+                                    <a href="{% url 'blog_detail' prev_blog.id %}" class="post-item prev-item">
                                         <h6><span class="arrow_carrot-left"></span> Previous posts</h6>
-                                        <div class="pi-pic">
-                                            <img src="img/blog/details/prev.jpg" alt="">
-                                        </div>
+
                                         <div class="pi-text">
-                                            <div class="label">Stories</div>
-                                            <h5>The Best Weeknight Baked<br /> Potatoes, 3 Creative Ways</h5>
+                                            <div class="label">{{ prev_blog.main_tag }}</div>
+                                            <h5>{{ prev_blog.title }}</h5>
                                         </div>
                                     </a>
                                 </div>
+                                {% endif %}
+                                {% if next_blog %}
                                 <div class="col-lg-6">
-                                    <a href="#" class="post-item next-item">
+                                    <a href="{% url 'blog_detail' next_blog.id %}" class="post-item next-item">
                                         <h6>Next posts <span class="arrow_carrot-right"></span></h6>
-                                        <div class="pi-pic">
-                                            <img src="img/blog/details/next.jpg" alt="">
-                                        </div>
+
                                         <div class="pi-text">
-                                            <div class="label">Typography</div>
-                                            <h5>The $8 French Rosé I Buy in<br /> Bulk Every Summer</h5>
+                                            <div class="label">{{ next_blog.main_tag }}</div>
+                                            <h5>{{ next_blog.title }}</h5>
                                         </div>
                                     </a>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
 

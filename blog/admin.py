@@ -30,7 +30,6 @@ class BlogItemAdmin(admin.ModelAdmin):
         (None, {"fields": ("main_tag", "tags", "main_photo", "title",
                            "image",
                            "content",
-                           "pre_text",
                            "feature_post",
                            )}),
     )

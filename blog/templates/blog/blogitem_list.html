@@ -23,7 +23,7 @@
                             <ul>
                                 <li>{{ object.date|date:"d/m/Y" }}</li>
                             </ul>
-                            <p>{{ object.pre_text }}</p>
+                            <p>{{ object.pre_text| striptags | safe | escape }}</p>
                         </div>
                     </div>
                     {% endfor %}

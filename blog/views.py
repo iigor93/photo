@@ -44,12 +44,19 @@ class BlogDetail(View):
     def get(self, request, *args, **kwargs):
         pk = kwargs.get("pk")
         blog = BlogItem.objects.prefetch_related("tags").select_related("main_tag").get(pk=pk)
+        prev_blog = BlogItem.objects.filter(pk__lt=blog.id)
+        prev_blog = prev_blog.first() if prev_blog else None
+        next_blog = BlogItem.objects.filter(pk__gt=blog.id)
+        next_blog = next_blog.last() if next_blog else None
         tags = [blog.main_tag]
         tags.extend(blog.tags.all())
         tags = list(set(tags))
         context = {
+            "blog": True,
             "object": blog,
             "tags": tags,
+            "prev_blog": prev_blog,
+            "next_blog": next_blog,
         }
 
         return render(request, self.template_name, context=context)

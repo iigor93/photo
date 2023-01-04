@@ -1,3 +1,5 @@
+import re
+
 from django.db import models
 from django.utils.safestring import mark_safe
 
@@ -37,7 +39,7 @@ class BlogItem(models.Model):
     class Meta:
         verbose_name = "Запись блога"
         verbose_name_plural = "Записи блогов"
-        ordering = ("date",)
+        ordering = ("-date",)
 
     date = models.DateField(verbose_name="Дата создания", auto_now_add=True)
     main_tag = models.ForeignKey(BlogTag, verbose_name="Главный тег", null=True, on_delete=models.SET_NULL)
@@ -49,6 +51,12 @@ class BlogItem(models.Model):
     content = models.TextField(verbose_name='Текст страницы', null=True)
     pre_text = models.CharField(max_length=1024, verbose_name="Текст в списке блогов", null=True, blank=True)
     feature_post = models.BooleanField(default=False, verbose_name="Популярный пост")
+
+    def save(self, *args, **kwargs):
+        txt = self.content
+        pre_txt = re.sub("<img .*? >", "", txt)
+        self.pre_text = " ".join(pre_txt.split(" ")[:5])
+        super(BlogItem, self).save(*args, **kwargs)
 
     def image_thumb(self):
         return mark_safe('<img src="/media/%s" height=50>' % self.main_photo)
