@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import DetailView
 
-from core.models import Carousel, Advantage, Portfolio, SubscribeEmail, Contact, About
+from core.models import Carousel, Advantage, Portfolio, SubscribeEmail, Contact, About, Category
 from price.models import Faq
 
 
@@ -17,7 +17,11 @@ class Index(View):
     def get(self, request):
         carousel = Carousel.objects.filter(active=True)
         advantages = Advantage.objects.filter(active=True)
-        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)
+        categories_list = Category.objects.prefetch_related("portfolio_set").all()
+        categories_dict = {}
+        for item in categories_list:
+            categories_dict[item] = item.portfolio_set.all().count()
+        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)[:10]
         categories = []
         for item in portfolio:
             cat = list(item.category.all())
@@ -30,7 +34,8 @@ class Index(View):
             "portfolio": portfolio,
             "categories": categories,
             "home": True,
-            "breadcrumb": "Home"
+            "breadcrumb": "Home",
+            "categories_dict": categories_dict,
         }
 
         return render(request, self.template_name, context=context)
