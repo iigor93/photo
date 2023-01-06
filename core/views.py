@@ -111,13 +111,53 @@ class ServiceView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class APILoadView(View):
+    NUM_OF_PHOTO = 5
+
     def post(self, request, *args, **kwargs):
-        portfolio = Portfolio.objects.filter(active=True)[5:10]
-        lst = []
+        print(request.POST)
+        current_page = request.POST.get("page")
+        try:
+            current_page = int(current_page)
+            last_page = Portfolio.objects.filter(active=True).count()
+            response = "last" if current_page + self.NUM_OF_PHOTO >= last_page else "ok"
+            portfolio = Portfolio.objects.filter(active=True)[current_page:current_page + self.NUM_OF_PHOTO]
+            lst = []
+            for item in portfolio:
+                categories = list(item.category.all().values_list("name", flat=True))
+                categories = " ".join(categories)
+
+                lst.append([item.image.url, item.title, categories])
+
+            return JsonResponse({response: lst}, safe=False)
+
+        except BaseException as e:
+            print(e)
+
+        return JsonResponse({'err': []}, safe=False)
+
+
+class PortfolioView(View):
+    template_name = "core/portfolio.html"
+
+    def get(self, request, *args, **kwargs):
+
+        categories_list = Category.objects.prefetch_related("portfolio_set").all()
+        categories_dict = {}
+        for item in categories_list:
+            categories_dict[item] = item.portfolio_set.all().count()
+        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)[:5]
+        categories = []
         for item in portfolio:
-            categories = list(item.category.all().values_list("name", flat=True))
-            categories = " ".join(categories)
+            cat = list(item.category.all())
+            categories.extend(cat)
+        categories = list(set(categories))
 
-            lst.append([item.image.url, item.title, categories])
+        context = {
+            "portfolio": portfolio,
+            "portfolio_menu": True,
+            "categories": categories,
+            "breadcrumb": "Portfolio",
+            "categories_dict": categories_dict,
+        }
 
-        return JsonResponse(lst, safe=False)
+        return render(request, self.template_name, context=context)
