@@ -133,7 +133,6 @@
             data: {"page": Number($("#load_more").attr("page"))},
             method: "POST",
             success: function(data_dict) {
-                console.log(Object.keys(data_dict)[0]);
                 if (Object.keys(data_dict)[0] === "last") {
                     $("#load_more").hide();
                 }
