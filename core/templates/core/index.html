@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="container-fluid">
-            <div class="row">
+            <div class="row portfolio-row">
                 <div class="col-lg-12 p-0">
                     <div class="portfolio-filter">
                         {% for item in portfolio %}
@@ -110,10 +110,48 @@
                 </div>
             </div>
         </div>
+
         <div class="load-more-btn">
             <a href="#">Load More</a>
+            <button onclick="loadPic()">Load more</button>
         </div>
     </section>
     <!-- Portfolio Section End -->
+
+<script>
+    function loadPic(){
+        
+        console.log("df");
+        // var div_start = '<div class="container-fluid"><div class="row"><div class="col-lg-12 p-0"><div class="portfolio-filter">';
+        // var div_end = '</div></div></div></div>';
+        var div_start = '<div class="row portfolio-row"><div class="col-lg-12 p-0"><div class="portfolio-filter">';
+        var div_end = '</div></div></div>';
+        $.ajax({
+            url: "{% url 'api_load' %}",  
+            method: "POST",
+            success: function(data) {
+                // console.log(data); 
+                $( data ).each(function() {
+                    var temp_div = '<div class="pf-item set-bg ' + this[2] + '" data-setbg="';
+                    var temp_div2 = '" style="background-image: url(&quot;';
+                    var temp_div3 = '&quot;);">'
+                    var temp_link = '<a href="' + this[0] + '" class="pf-icon image-popup"><span class="icon_plus"></span></a>'
+                    var temp_title = '<div class="pf-text"><h4>' + this[1] + '</h4><span>' + this[2] + '</span></div>'
+                    var temp_end = '</div>';
+                    div_start += temp_div + this[0] + temp_div2 + this[0] + temp_div3 + temp_link + temp_title + temp_end;
+                });
+                div_start += div_end;
+                $( ".portfolio-row" ).last().after(div_start).show();
+            
+                $('.image-popup').magnificPopup({
+                    type: 'image'
+                });
+            }
+
+        });
+
+        
+    };
+</script>
 
 {% endblock %}

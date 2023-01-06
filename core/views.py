@@ -1,10 +1,12 @@
 import math
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import DetailView
 
 from core.models import Carousel, Advantage, Portfolio, SubscribeEmail, Contact, About, Category
@@ -21,7 +23,7 @@ class Index(View):
         categories_dict = {}
         for item in categories_list:
             categories_dict[item] = item.portfolio_set.all().count()
-        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)[:10]
+        portfolio = Portfolio.objects.prefetch_related("category").filter(active=True)[:5]
         categories = []
         for item in portfolio:
             cat = list(item.category.all())
@@ -105,3 +107,17 @@ class ServiceView(View):
             context["faq_half"] = faq_half
 
         return render(request, self.template_name, context=context)
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class APILoadView(View):
+    def post(self, request, *args, **kwargs):
+        portfolio = Portfolio.objects.filter(active=True)[5:10]
+        lst = []
+        for item in portfolio:
+            categories = list(item.category.all().values_list("name", flat=True))
+            categories = " ".join(categories)
+
+            lst.append([item.image.url, item.title, categories])
+
+        return JsonResponse(lst, safe=False)
