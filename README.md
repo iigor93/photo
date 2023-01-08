@@ -6,6 +6,8 @@ __Proxy server:__ Nginx (also manage all static and media files)
 
 __WSGI server:__ Gunicorn
 
+__User config__ via Django admin panel
+
 ## Architecture
 **: photo**
 
